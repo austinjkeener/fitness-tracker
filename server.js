@@ -1,3 +1,4 @@
+// activity 15 is a good reference if i get stuck. right now my server works, but it does not redirect properly to a followup page.
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
