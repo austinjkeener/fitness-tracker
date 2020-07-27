@@ -1,4 +1,4 @@
-// activity 15 is a good reference if i get stuck. right now my server works, but it does not redirect properly to a followup page.
+// activity 15 is a good reference if i get stuck. right now my server works, but it does not redirect properly to a followup page. reference the grading ruburic for how to use each dependence and for a good overview of how to setup the application.
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
