@@ -18,9 +18,9 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
 
 app.get("/", (req, res) => {
-  db.Note.find({})
-    .then(dbNote => {
-      res.json(dbNote);
+  db.exercise.find({})
+    .then(dbexercise => {
+      res.json(dbexercise);
     })
     .catch(err => {
       res.json(err);
