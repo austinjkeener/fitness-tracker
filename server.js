@@ -1,3 +1,6 @@
+
+// activity 15 is a good reference if i get stuck. right now my server works, but it does not redirect properly to a followup page. reference the grading ruburic for how to use each dependence and for a good overview of how to setup the application.
+
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -18,9 +21,15 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
 
 app.get("/", (req, res) => {
+
   db.exercise.find({})
     .then(dbexercise => {
       res.json(dbexercise);
+
+  db.Note.find({})
+    .then(dbNote => {
+      res.json(dbNote);
+
     })
     .catch(err => {
       res.json(err);
