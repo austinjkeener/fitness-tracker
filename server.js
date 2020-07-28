@@ -8,6 +8,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
+const { Recoverable } = require("repl");
 
 const app = express();
 
@@ -18,28 +19,42 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
-app.get("/", (req, res) => {
-  db.Note.find({})
-    // .then(dbNote => {
-    //   res.json(dbNote);
-    // })
-    // .catch(err => {
-    //   res.json(err);
-    // });
-});
+//Left to do...
+//1. Set up an api workout to see the stats. api/workout/range (this will be a get route)
+//2. I need to create routes that allow me to create a new workout. Use app.post instead of app.put 
 
-app.
-
+//updating the existing document within the workout database
+app.put("/api/workouts/:id", (req,res) => {
+  console.log(req.params.id);
+//this will add a new exercise into my existing array
+db.Workout.findOneAndUpdate({ _id: req.params.id }, 
+{ $push: { exercises: req.body}}, { new: true })
+.then(dbWorkout => {
+    res.json(dbWorkout)
+})
+})
+//sending the html file so that the client can see it
 app.get("/stats", (req, res) => {
   res.sendFile(path.join(__dirname, './public/stats.html'))
 });
-
+//sending the html file so that the client can see it
 app.get("/exercise", (req, res) => {
   res.sendFile(path.join(__dirname, './public/exercise.html'))
 });
+//this is finding information within the database because it is an api route and then is sending the information
+// back to the front end.
+app.get("/api/workouts", (req, res) => {
+  console.log(db.Workout)
+ db.Workout.find({}).then(dbWorkout => {
+   console.log(dbWorkout);
+   //sends back an array of objects response
+   res.json(dbWorkout);
+ })
+});
 
+//adding new exercises
 // app.post("/", ({ body }, res) => {
 //   db.Note.create(body)
 //     .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { notes: _id } }, { new: true }))
