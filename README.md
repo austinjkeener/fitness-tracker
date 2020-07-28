@@ -16,11 +16,11 @@ When the user loads the page, they should be given the option to create a new wo
 
 The user should be able to:
 
-  * Add exercises to a previous workout plan.
+  * Add exercises to a previous workout plan. (.update or .put)
 
-  * Add new exercises to a new workout plan.
+  * Add new exercises to a new workout plan. (.post)
 
-  * View multiple the combined weight of multiple exercises on the `stats` page.
+  * View multiple the combined weight of multiple exercises on the `stats` page. (.get)
 
 ## Commit Early and Often
 

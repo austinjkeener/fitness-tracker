@@ -2,6 +2,8 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const compression = require("compression");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,32 +22,22 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { 
 
 app.get("/", (req, res) => {
   db.Note.find({})
-    .then(dbNote => {
-      res.json(dbNote);
-    })
-    .catch(err => {
-      res.json(err);
-    });
+    // .then(dbNote => {
+    //   res.json(dbNote);
+    // })
+    // .catch(err => {
+    //   res.json(err);
+    // });
+});
+
+app.
+
+app.get("/stats", (req, res) => {
+  res.sendFile(path.join(__dirname, './public/stats.html'))
 });
 
 app.get("/exercise", (req, res) => {
-  db.Exercise.find({})
-    .then(dbExercise => {
-      res.json(dbExercise);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-app.get("/stats", (req, res) => {
-  db.Stats.find({})
-    .then(dbStats => {
-      res.json(dbStats);
-    })
-    .catch(err => {
-      res.json(err);
-    });
+  res.sendFile(path.join(__dirname, './public/exercise.html'))
 });
 
 // app.post("/", ({ body }, res) => {
