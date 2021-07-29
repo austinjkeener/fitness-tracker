@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const compression = require("compression");
+// const compression = require("compression");
 const Schema = mongoose.Schema;
 
 //defines the type of information that will be put into mongodb
